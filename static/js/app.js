@@ -2,7 +2,12 @@
 var tableData = data;
 
 function printTable(data){
+    // quick and dirty update method
+    d3.select("#ufo-table>tbody").remove();
+    d3.select("#ufo-table").append("tbody");
+
     var ufoTableBody = d3.select("#ufo-table>tbody");
+
     data.forEach((ufoSighting) => {
         var row = ufoTableBody.append("tr");
         Object.values(ufoSighting).forEach(value => {
@@ -12,29 +17,21 @@ function printTable(data){
     });
 };
 
-// adds data to table
-printTable(tableData);
-
-// filtering by date
-var dateBtn = d3.select("#filter-btn");
-//var form = d3.select("form");
-
-dateBtn.on("click", () => {
+function filterByInput(){
     d3.event.preventDefault();
     var input = d3.select("#datetime");
     var value = input.property("value");
-    var filtered = data.filter(sighting => sighting.datetime == value);
+    var filtered = tableData.filter(sighting => sighting.datetime == value);
     printTable(filtered);
-});
+};
 
-// form.on("submit", () => {
-//     d3.event.preventDefault();
-//     var input = d3.select("#datetime");
-//     var value = input.property("value");
+// initial print
+printTable(tableData);
 
-//     var filtered = data.filter(sighting => sighting.date == input);
+var dateBtn = d3.select("#filter-btn");
+var form = d3.select("form");
 
-//     printTable(filtered);
-// });
+dateBtn.on("click", filterByInput);
+form.on("submit", filterByInput);
 
 
