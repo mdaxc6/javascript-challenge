@@ -29,12 +29,9 @@ function filterByInput(){
     });
 
     for (var i = 0; i < inputValues.length; i++){
-        console.log(inputValues[i])
         if (inputValues[i] != ""){
-            filtered = filtered.filter(item => item[inputs[i]] == inputValues[i]);
-            
+            filtered = filtered.filter(item => item[inputs[i]] == inputValues[i]);            
         } 
-        console.log(filtered)
     };
 
     printTable(filtered);
