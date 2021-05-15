@@ -19,9 +19,24 @@ function printTable(data){
 
 function filterByInput(){
     d3.event.preventDefault();
-    var input = d3.select("#datetime");
-    var value = input.property("value");
-    var filtered = tableData.filter(sighting => sighting.datetime == value);
+    var inputs = ['datetime', 'city', 'state', 'country', 'shape'];
+    var inputValues = [];
+    var filtered = tableData;
+
+    inputs.forEach(input => {
+        var temp = d3.select(`#${input}-input`);
+        if (temp.property("value") != null) {inputValues.push(temp.property("value"));};
+    });
+
+    for (var i = 0; i < inputValues.length; i++){
+        console.log(inputValues[i])
+        if (inputValues[i] != ""){
+            filtered = filtered.filter(item => item[inputs[i]] == inputValues[i]);
+            
+        } 
+        console.log(filtered)
+    };
+
     printTable(filtered);
 };
 
