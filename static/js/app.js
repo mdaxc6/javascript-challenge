@@ -45,5 +45,3 @@ var form = d3.select("form");
 
 dateBtn.on("click", filterByInput);
 form.on("submit", filterByInput);
-
-
